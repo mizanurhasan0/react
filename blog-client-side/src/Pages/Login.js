@@ -1,31 +1,65 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
-
+import { AuthContext } from "../Helper/AuthContext";
 export const Login = () => {
+  const apiLink = "http://localhost:3001/auth/login";
+  const { authState, setAuthState } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const login = () => {
+    const data = { username: username, password: password };
+
+    axios.post(apiLink, data).then((response) => {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
+        localStorage.setItem("accessToken", response.data.token);
+
+        setAuthState({
+          username: response.data.username,
+          id: response.data.id,
+          status: true,
+        });
+        navigate("/");
+      }
+    });
+  };
   return (
     <div className="AppLogin">
       <div className="loginBox">
         <img
-          src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Free-Image.png"
+          src={require("./avater.png")}
           className="avater"
           alt="avater img"
         />
         <h1>Login Here</h1>
-        <form>
-          <p>Username</p>
-          <input type="text" name="" placeholder="Enter Username..." />
-          <p>Password</p>
-          <input type="Password" name="" placeholder="Enter Password..." />
-          <input type="submit" name="" value="Login" />
-          <Link className="link" to="#">
-            Lost Your Password?
-          </Link>
 
-          <Link className="link" to="#">
-            Don't have an account?
-          </Link>
-        </form>
+        <p>Username</p>
+        <input
+          type="text"
+          onChange={(event) => setUsername(event.target.value)}
+          placeholder="Enter Username..."
+        />
+        <p>Password</p>
+        <input
+          type="Password"
+          onChange={(event) => setPassword(event.target.value)}
+          placeholder="Enter Password..."
+        />
+        <button onClick={login}>Login</button>
+        <Link className="link" to="#">
+          Lost Your Password?
+        </Link>
+
+        <Link className="link" to="/reg">
+          Don't have an account?
+        </Link>
       </div>
     </div>
   );

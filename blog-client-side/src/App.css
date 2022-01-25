@@ -27,6 +27,7 @@
   background-color: black;
   color: white;
   height: 300px;
+  cursor: pointer;
 }
 .title {
   font-size: 1.5rem;
@@ -71,4 +72,10 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #0181a5;
+}
+.wrapper-grid .btn-like {
+  background-color: rgb(62, 62, 236);
+}
+.wrapper-grid .btn-unlike {
+  background-color: rgb(204, 236, 62);
 }

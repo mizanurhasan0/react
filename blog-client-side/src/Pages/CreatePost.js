@@ -1,26 +1,36 @@
 import "./CreatePost.css";
 import axios from "axios";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 export const CreatePost = () => {
+  const navigate = useNavigate();
+
   const apiLink = "http://localhost:3001/posts";
   const initialValues = {
     title: "",
     postText: "",
-    username: "",
   };
+  useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      navigate("/login");
+    }
+  });
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("You must input title"),
     postText: Yup.string().required(),
-    username: Yup.string().min(3).max(12).required(),
   });
   const onSubmit = (data) => {
-    axios.post(apiLink, data).then((response) => {
-      console.log("It's Work");
-    });
+    axios
+      .post(apiLink, data, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        navigate("/");
+        console.log("It's Work");
+      });
   };
 
   return (
@@ -57,7 +67,7 @@ export const CreatePost = () => {
               placeholder="(Ex. Post...)"
             />
 
-            <label>Username </label>
+            {/* <label>Username </label>
             <br />
             <ErrorMessage name="username" component="span" />
             <Field
@@ -66,7 +76,7 @@ export const CreatePost = () => {
               id="inputCreatePost"
               name="username"
               placeholder="(Ex. Username...)"
-            />
+            /> */}
             <button type="submit">Create Post</button>
           </Form>
         </Formik>
