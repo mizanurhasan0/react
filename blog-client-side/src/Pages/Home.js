@@ -82,16 +82,27 @@ export const Home = () => {
               {val.postText}
             </p>
             <h4 className="footer">
-              <Link to={`/profile/${val.UserId}`}> {val.username}</Link>
+              <Link to={`/profile/${val.UserId}`} className="footerName">
+                {" "}
+                {val.username}
+              </Link>
 
-              <button
+              {/* <button
                 className={
                   likePosts.includes(val.id) ? "btn-like" : "btn-unlike"
                 }
                 onClick={() => likeThePost(val.id)}
               >
                 Like
-              </button>
+              </button> */}
+              <input
+                className={
+                  likePosts.includes(val.id) ? "btn-like" : "btn-unlike"
+                }
+                value={!likePosts.includes(val.id) ? "Like" : "Unlike"}
+                type="button"
+                onClick={() => likeThePost(val.id)}
+              />
               <label>{val.Likes.length}</label>
             </h4>
           </div>

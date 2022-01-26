@@ -1,10 +1,12 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Profile.css";
+import { AuthContext } from "../Helper/AuthContext";
+
 export const Profile = () => {
   let navigate = useNavigate();
-
+  const { authState } = useContext(AuthContext);
   const { id } = useParams();
   const [username, setUsername] = useState();
   const [listOfPosts, setListOfPosts] = useState([]);
@@ -31,6 +33,15 @@ export const Profile = () => {
     <div className="profileContainer">
       <div className="basicInfo">
         <h1>{username}</h1>
+        {authState.username === username && (
+          <button
+            onClick={() => {
+              navigate("/changepassword");
+            }}
+          >
+            Change Password
+          </button>
+        )}
       </div>
       <div className="listOfPost">
         {listOfPosts.map((value, key) => {

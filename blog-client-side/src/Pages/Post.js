@@ -82,12 +82,58 @@ export const Post = () => {
         naigation("/");
       });
   };
+  const updateTitle = (option) => {
+    if (option === "title") {
+      const newTitle = prompt("Title Update");
+      if (newTitle === "null" || newTitle === null || newTitle === "") {
+        alert("Enter Your Title ");
+      } else {
+        axios.put(
+          "http://localhost:3001/posts/title",
+          { newTitle: newTitle, id: id },
+          { headers: { accessToken: localStorage.getItem("accessToken") } }
+        );
+        setPostObject({ ...postObject, title: newTitle });
+      }
+    } else if (option === "body") {
+      const bodyText = prompt("Update Your body Text");
+      if (bodyText === "null" || bodyText === null || bodyText === "") {
+        alert("Input your body Field");
+      } else {
+        axios.put(
+          "http://localhost:3001/posts/body",
+          { newBodyText: bodyText, id: id },
+          { headers: { accessToken: localStorage.getItem("accessToken") } }
+        );
+        setPostObject({ ...postObject, postText: bodyText });
+      }
+    }
+  };
   return (
     <div className="postPage">
       <div className="leftSide">
         <div className="post" id="individual">
-          <div className="postTitle"> {postObject.title} </div>
-          <div className="body">{postObject.postText}</div>
+          <div
+            className="postTitle"
+            onClick={() => {
+              if (authState.username === postObject.username) {
+                updateTitle("title");
+              }
+            }}
+          >
+            {" "}
+            {postObject.title}{" "}
+          </div>
+          <div
+            className="body"
+            onClick={() => {
+              if (authState.username === postObject.username) {
+                updateTitle("body");
+              }
+            }}
+          >
+            {postObject.postText}
+          </div>
           <div className="postFooter">
             {postObject.username}{" "}
             {authState.username === postObject.username && (

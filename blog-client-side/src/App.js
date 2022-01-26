@@ -14,6 +14,7 @@ import axios from "axios";
 import { AuthContext } from "./Helper/AuthContext";
 import { PageNotFound } from "./Pages/PageNotFound";
 import { Profile } from "./Pages/Profile";
+import { ChangePassword } from "./Pages/ChangePassword";
 
 function App() {
   const apiLink = "http://localhost:3001/auth/authCheck";
@@ -55,6 +56,7 @@ function App() {
             <Route path="/post/:id" exact element={<Post />} />
             <Route path="/reg" exact element={<Registration />} />
             <Route path="/profile/:id" exact element={<Profile />} />
+            <Route path="/changepassword" exact element={<ChangePassword />} />
             <Route path="/*" exact element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>
