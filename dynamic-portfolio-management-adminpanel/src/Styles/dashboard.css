@@ -1,5 +1,5 @@
 .DashboardApp {
-  position: relative;
+  position: fixed;
   width: 100%;
 }
 .navigation {
@@ -256,7 +256,7 @@
   }
   .main {
     width: 100%;
-    left: 0;
+    left: 0px;
   }
   .main.active {
     width: calc(100% - 300px);
@@ -265,5 +265,16 @@
   .cardBox {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .details {
+    width: 100%;
+    padding: 20px;
+    padding-top: 0;
+    display: grid;
+    grid-gap: 20px;
+    /* grid-template-columns: 1fr 1fr; */
+    grid-template-columns: repeat(1, 1fr);
   }
 }

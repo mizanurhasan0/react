@@ -2,7 +2,7 @@ import "./App.css";
 import { Navbar } from "./Portfolio/Components/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./Portfolio/Pages/Home";
-import { Dashboard } from "./AdminPanel/Components/Dashboard";
+import { DashboardHome } from "./AdminPanel/DashboardHome";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<DashboardHome />} />
         </Routes>
       </BrowserRouter>
     </div>
