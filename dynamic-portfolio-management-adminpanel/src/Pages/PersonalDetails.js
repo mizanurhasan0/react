@@ -1,12 +1,17 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../Styles/formDesign.css";
 import "../Styles/personalDetails.css";
+import axios from "axios";
 
 export const PersonalDetails = () => {
+  const navigation = useNavigate();
+  const Api = "http://localhost:3001/userinfo";
+
   const initialValues = {
+    summary: "",
     father: "",
     mother: "",
     nationality: "",
@@ -17,12 +22,22 @@ export const PersonalDetails = () => {
     gender: "",
   };
   const validationSchema = Yup.object().shape({
-    father: Yup.string().required("Input University Name"),
-    mother: Yup.string().required(),
+    father: Yup.string().required("Required Field"),
+    mother: Yup.string().required("Required Field"),
+    nationality: Yup.string().required("Required Field"),
+    address: Yup.string().required("Required Field"),
+    birth: Yup.string().required("Required Field"),
+    blood: Yup.string().required("Required Field"),
+    summary: Yup.string().required("Required Field"),
+    religion: Yup.string().required("Required Field"),
+    gender: Yup.string().required("Required Field"),
   });
 
-  const onSubmit = (e) => {
-    console.log(e);
+  const onSubmit = (data) => {
+    data.skill = "userInfo";
+    axios.post(Api, data).then((response) => {
+      console.log(response);
+    });
   };
   return (
     <div className="AppExperience">
@@ -36,6 +51,17 @@ export const PersonalDetails = () => {
           validationSchema={validationSchema}
         >
           <Form className="formContainer">
+            <label>Short Description About yourself</label>
+            <br />
+            <ErrorMessage name="summary" component="span" />
+            <Field
+              autoComplete="off"
+              id="inputCreatePost"
+              className="inputField"
+              name="summary"
+              placeholder="(Ex. i'm software Enginner...)"
+            />
+
             <label>Father Name</label>
             <br />
             <ErrorMessage name="father" component="span" />

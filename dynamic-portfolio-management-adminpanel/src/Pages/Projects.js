@@ -1,22 +1,29 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../Styles/formDesign.css";
+import axios from "axios";
 
 export const Projects = () => {
+  const navigation = useNavigate();
+  const Api = "http://localhost:3001/project";
+
   const initialValues = {
-    name: "",
+    projectName: "",
     technology: "",
-    link: "",
+    projectLink: "",
   };
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Input University Name"),
-    technology: Yup.string().required(),
+    projectName: Yup.string().required("Required Field"),
+    technology: Yup.string().required("Required Field"),
+    projectLink: Yup.string().required("Required Field"),
   });
 
-  const onSubmit = () => {
-    console.log("alert");
+  const onSubmit = (data) => {
+    axios.post(Api, data).then((response) => {
+      console.log(response);
+    });
   };
   return (
     <div className="AppExperience">
@@ -32,12 +39,12 @@ export const Projects = () => {
           <Form className="formContainer">
             <label>Project Name</label>
             <br />
-            <ErrorMessage name="name" component="span" />
+            <ErrorMessage name="projectName" component="span" />
             <Field
               autoComplete="off"
               className="inputField"
               id="inputCreatePost"
-              name="name"
+              name="projectName"
               placeholder="(Ex. School Management...)"
             />
             <label>Use Technology</label>
@@ -52,12 +59,12 @@ export const Projects = () => {
             />
             <label>Project Link </label>
             <br />
-            <ErrorMessage name="link" component="span" />
+            <ErrorMessage name="projectLink" component="span" />
             <Field
               autoComplete="off"
               className="inputField"
               id="inputCreatePost"
-              name="link"
+              name="projectLink"
               placeholder="(Ex. MySql...)"
             />
 

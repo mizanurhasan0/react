@@ -116,3 +116,8 @@
     border-radius: 30px;
   }
 }
+.errorMessage {
+  float: right;
+  color: #c53430;
+  text-transform: capitalize;
+}

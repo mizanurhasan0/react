@@ -1,25 +1,34 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../Styles/formDesign.css";
+import axios from "axios";
 
 export const Education = () => {
+  const navigation = useNavigate();
+  const Api = "http://localhost:3001/education";
+
   const initialValues = {
-    name: "",
     degree: "",
-    university: "",
+    institute: "",
     cgpa: "",
-    year: "",
+    passyear: "",
   };
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Input University Name"),
-    degree: Yup.string().required(),
+    degree: Yup.string().required("Required field"),
+    institute: Yup.string().required("Required field"),
+    cgpa: Yup.string().required("Required field"),
+    passyear: Yup.string().required("Required field"),
   });
 
-  const onSubmit = () => {
-    console.log("alert");
+  const onSubmit = (data) => {
+    console.log(data);
+    axios.post(Api, data).then((response) => {
+      console.log("add Education");
+    });
   };
+
   return (
     <div className="AppExperience">
       <div className="CreateBox">
@@ -32,7 +41,7 @@ export const Education = () => {
           validationSchema={validationSchema}
         >
           <Form className="formContainer">
-            <label>Degree Name </label>
+            <label>Education Degree </label>
             <br />
             <ErrorMessage name="degree" component="span" />
             <Field
@@ -45,12 +54,12 @@ export const Education = () => {
 
             <label>University </label>
             <br />
-            <ErrorMessage name="university" component="span" />
+            <ErrorMessage name="institute" component="span" />
             <Field
               autoComplete="off"
               className="inputField"
               id="inputCreatePost"
-              name="university"
+              name="institute"
               placeholder="(Ex. University Name...)"
             />
             <label>CGPA</label>
@@ -65,12 +74,12 @@ export const Education = () => {
             />
             <label>Passing Year </label>
             <br />
-            <ErrorMessage name="year" component="span" />
+            <ErrorMessage name="passyear" component="span" />
             <Field
               autoComplete="off"
               className="inputField"
               id="inputCreatePost"
-              name="year"
+              name="passyear"
               placeholder="(Ex. 2022...)"
             />
 

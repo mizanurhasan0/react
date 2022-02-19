@@ -1,10 +1,14 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../Styles/formDesign.css";
+import axios from "axios";
 
 export const Skills = () => {
+  const navigation = useNavigate();
+  const Api = "http://localhost:3001/userinfo";
+
   const initialValues = {
     backend: "",
     frontend: "",
@@ -12,12 +16,18 @@ export const Skills = () => {
     scm: "",
   };
   const validationSchema = Yup.object().shape({
-    backend: Yup.string().required("Input University Name"),
-    frontend: Yup.string().required(),
+    backend: Yup.string().required("Required field"),
+    frontend: Yup.string().required("Required field"),
+    database: Yup.string().required("Required field"),
+    scm: Yup.string().required("Required field"),
   });
 
-  const onSubmit = () => {
-    console.log("alert");
+  const onSubmit = (data) => {
+    data.skill = "skill";
+    console.log(data);
+    axios.post(Api, data).then((response) => {
+      console.log(response);
+    });
   };
   return (
     <div className="AppExperience">

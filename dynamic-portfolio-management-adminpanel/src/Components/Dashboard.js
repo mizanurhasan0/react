@@ -48,7 +48,7 @@ export const Dashboard = () => {
             <li>
               <Link to="/education">
                 <span className="icon">
-                  <i class="fa fa-building"></i>
+                  <i className="fa fa-building"></i>
                 </span>
                 <span className="title">Education</span>
               </Link>
@@ -56,7 +56,7 @@ export const Dashboard = () => {
             <li>
               <Link to="/skills">
                 <span className="icon">
-                  <i class="fa fa-flask"></i>
+                  <i className="fa fa-flask"></i>
                 </span>
                 <span className="title">Skills</span>
               </Link>
@@ -64,7 +64,7 @@ export const Dashboard = () => {
             <li>
               <Link to="/projects">
                 <span className="icon">
-                  <i class="fa fa-briefcase"></i>
+                  <i className="fa fa-briefcase"></i>
                 </span>
                 <span className="title">Projects</span>
               </Link>
@@ -80,7 +80,7 @@ export const Dashboard = () => {
             <li>
               <Link to="/setting">
                 <span className="icon">
-                  <i class="fa fa-gear"></i>
+                  <i className="fa fa-gear"></i>
                 </span>
                 <span className="title">Setting</span>
               </Link>
@@ -88,7 +88,7 @@ export const Dashboard = () => {
             <li>
               <Link to="/view">
                 <span className="icon">
-                  <i class="fa fa-eye"></i>
+                  <i className="fa fa-eye"></i>
                 </span>
                 <span className="title">View</span>
               </Link>
@@ -96,7 +96,7 @@ export const Dashboard = () => {
             <li>
               <Link to="/gallary">
                 <span className="icon">
-                  <i class="fa fa-camera"></i>
+                  <i className="fa fa-camera"></i>
                 </span>
                 <span className="title">Gallary</span>
               </Link>

@@ -24,13 +24,12 @@
 .card .cardInfo {
   display: grid;
   grid-template-columns: repeat(2, auto);
-  padding: 0 10px 0 10px;
+  padding: 0 10px 0px 10px;
 }
 
 .card img {
   height: 90px;
   width: 90px;
-  position: absolute;
   border: 1px solid rgb(153, 153, 153);
 }
 .card .cardInfo .userInfo {
@@ -176,4 +175,10 @@
   font-size: 30px;
   color: #50bbfd;
   cursor: pointer;
+}
+@media (max-width: 900px) {
+  .listOfCard {
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+  }
 }

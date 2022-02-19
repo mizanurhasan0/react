@@ -1,24 +1,33 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../Styles/formDesign.css";
+import "../Styles/experience.css";
+import axios from "axios";
 
 export const Experience = () => {
+  const navigation = useNavigate();
+  const Api = "http://localhost:3001/experience";
+
   const initialValues = {
-    name: "",
-    project: "",
-    fontTech: "",
-    backTech: "",
-    jobRespose: "",
+    companyName: "",
+    position: "",
+    jobResponsible: "",
+    year: "",
   };
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Input Company Name"),
-    project: Yup.string().required(),
+    companyName: Yup.string().required("Required Field"),
+    position: Yup.string().required("Required Field"),
+    jobResponsible: Yup.string().required("Required Field"),
+    year: Yup.string().required("Required Field"),
   });
 
-  const onSubmit = () => {
-    console.log("alert");
+  const onSubmit = (data) => {
+    console.log(data);
+    axios.post(Api, data).then((response) => {
+      console.log(response);
+    });
   };
   return (
     <div className="AppExperience">
@@ -34,57 +43,64 @@ export const Experience = () => {
           <Form className="formContainer">
             <label>Company Name </label>
             <br />
-            <ErrorMessage name="name" component="span" />
+            <ErrorMessage
+              name="companyName"
+              component="span"
+              className="errorMessage"
+            />
             <Field
               autoComplete="off"
               id="inputCreatePost"
               className="inputField"
-              name="name"
+              name="companyName"
               placeholder="(Ex. Software BD...)"
             />
 
-            <label>Major Project </label>
+            <label>Position</label>
             <br />
-            <ErrorMessage name="project" component="span" />
-            <Field
-              autoComplete="off"
-              className="inputField"
-              id="inputCreatePost"
-              name="project"
-              placeholder="(Ex. Book managment...)"
+            <ErrorMessage
+              name="position"
+              component="span"
+              className="errorMessage"
             />
-            <label>Font-end Technology </label>
-            <br />
-            <ErrorMessage name="fontTech" component="span" />
             <Field
               autoComplete="off"
               className="inputField"
               id="inputCreatePost"
-              name="fontTech"
-              placeholder="(Ex. Html,Css...)"
-            />
-            <label>Back-end Technology </label>
-            <br />
-            <ErrorMessage name="backTech" component="span" />
-            <Field
-              autoComplete="off"
-              className="inputField"
-              id="inputCreatePost"
-              name="backTech"
-              placeholder="(Ex. java, .Net, Python...)"
-            />
-            <label>Job Responsibility </label>
-            <br />
-            <ErrorMessage name="jobRespose" component="span" />
-            <Field
-              autoComplete="off"
-              className="inputField"
-              id="inputCreatePost"
-              name="jobRespose"
-              placeholder="(Ex. UX Design ...)"
+              name="position"
+              placeholder="(Ex. Senior angular Developer...)"
             />
 
-            <button type="submit">Create Post</button>
+            <label>Job Responsibility </label>
+            <br />
+            <ErrorMessage
+              name="jobResponsible"
+              component="span"
+              className="errorMessage"
+            />
+            <Field
+              as="textarea"
+              autoComplete="off"
+              className="inputField inputtextField"
+              id="inputCreatePost"
+              name="jobResponsible"
+              placeholder="(Ex. What do you work ...)"
+            />
+            <label>Joining and Ending Date </label>
+            <br />
+            <ErrorMessage
+              name="year"
+              component="span"
+              className="errorMessage"
+            />
+            <Field
+              autoComplete="off"
+              className="inputField"
+              id="inputCreatePost"
+              name="year"
+              placeholder="(Ex. 2021-2022)"
+            />
+            <button type="submit">Create Experience</button>
           </Form>
         </Formik>
       </div>

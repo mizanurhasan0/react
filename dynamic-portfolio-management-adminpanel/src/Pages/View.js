@@ -1,7 +1,33 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../Styles/view.css";
 
 export const View = () => {
+  const navigation = useNavigate();
+  const Api = "http://localhost:3001";
+
+  const [userDetails, setUserDetails] = useState([]);
+  const [userProject, setUserProject] = useState([]);
+  const [education, setEducation] = useState([]);
+  const [experience, setExperience] = useState([]);
+
+  useEffect(() => {
+    axios.get(Api + "/project/getworkbyuser").then((response) => {
+      setUserProject(response.data);
+      // console.log(userProject);
+    });
+    axios.get(Api + "/userinfo").then((response) => {
+      setUserDetails(response.data);
+      // console.log(userDetails);
+    });
+    axios.get(Api + "/education").then((response) => {
+      setEducation(response.data[0]);
+    });
+    axios.get(Api + "/experience").then((response) => {
+      setExperience(response.data);
+    });
+  }, []);
   return (
     <div className="ViewApp">
       <div className="listOfCard">
@@ -9,7 +35,7 @@ export const View = () => {
           <h2>Top Info</h2>
           <div className="cardInfo">
             <div>
-              <img src={require("../Images/logo.png")} />
+              <img src={require("../Images/logo.png")} alt="img" />
             </div>
             <div className="userInfo">
               <h3>User Name</h3>
@@ -32,58 +58,38 @@ export const View = () => {
                 <p>Dhanmondi-27, Dhaka</p>
               </div>
               <div className="edit">
-                <i class="fa fa-edit"></i>
+                <i className="fa fa-edit"></i>
               </div>
             </div>
           </div>
         </div>
-        {/*  */}
-
+        {/* Expirwnce ... */}
         <div className="card2">
           <h2>Experience</h2>
-          <div className="cardInfo">
-            <div className="userInfo">
-              <div className="headerExperience">
-                <h3>IT Executive</h3>
-                <p>2020 - 2022</p>
+          {experience.map((data, key) => {
+            return (
+              <div className="cardInfo" key={key}>
+                <div className="userInfo">
+                  <div className="headerExperience">
+                    <h3>{data.companyName}</h3>
+                    <p>{data.year}</p>
+                  </div>
+                  <div>
+                    <h3>{data.position}</h3>
+                  </div>
+                  <div>
+                    <p>
+                      <b>Job Responsibilities :</b>
+                      {data.jobResponsible}
+                    </p>
+                  </div>
+                  <div className="edit">
+                    <i className="fa fa-edit"></i>
+                  </div>
+                </div>
               </div>
-              <div>
-                <h3>Anowara Medical Service</h3>
-              </div>
-              <div>
-                <p>
-                  <b>Job Responsibilities :</b>
-                  Create/Modify Projects(Web, Desktop and Console Application),
-                  Bug- Fix, Requirement Gather, UI Design.
-                </p>
-              </div>
-              <div className="edit">
-                <i class="fa fa-edit"></i>
-              </div>
-            </div>
-          </div>
-
-          <div className="cardInfo">
-            <div className="userInfo">
-              <div className="headerExperience">
-                <h3>IT Executive</h3>
-                <p>2020 - 2022</p>
-              </div>
-              <div>
-                <h3>Anowara Medical Service</h3>
-              </div>
-              <div>
-                <p>
-                  <b>Job Responsibilities :</b>
-                  Create/Modify Projects(Web, Desktop and Console Application),
-                  Bug- Fix, Requirement Gather, UI Design.
-                </p>
-              </div>
-              <div className="edit">
-                <i class="fa fa-edit"></i>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
 
         {/*  */}
@@ -91,19 +97,22 @@ export const View = () => {
           <h2>Last Education</h2>
           <div className="cardInfo">
             <div className="userInfo">
-              <h3>Bsc in Software Engineer</h3>
+              <h3>{education.degree}</h3>
 
               <p>
-                <b>Institute :</b>Daffodil International University
+                <b>Institute :</b>
+                {education.institute}
               </p>
               <p>
-                <b>CGPA :</b>3.71 out of 4.00
+                <b>CGPA :</b>
+                {education.cgpa} out of 4.00
               </p>
               <p>
-                <b>Passing Year :</b>March 2016
+                <b>Passing Year :</b>
+                {education.passyear}
               </p>
               <div className="edit">
-                <i class="fa fa-edit"></i>
+                <i className="fa fa-edit"></i>
               </div>
             </div>
           </div>
@@ -112,58 +121,57 @@ export const View = () => {
         {/*  */}
         <div className="card4">
           <h2>Skills</h2>
+
           <div className="cardInfo">
             <div className="userInfo">
               <p>
-                <b>Backend :</b>Nodejs, java, SQL,Framework
+                <b>Backend :</b>
+                {userDetails[0] ? userDetails[0].backend : "Update Father Name"}
               </p>
               <p>
-                <b>Frontend :</b>ReactJS, Angular, HTML, CSS, SASS, Bootstrap.
+                <b>Frontend :</b>
+                {userDetails[0]
+                  ? userDetails[0].frontend
+                  : "Update Father Name"}
               </p>
               <p>
-                <b>Database :</b>Mongoose, MySql
+                <b>Database :</b>
+                {userDetails[0]
+                  ? userDetails[0].database
+                  : "Update Father Name"}
               </p>
               <p>
-                <b>SCM :</b>Git
+                <b>SCM :</b>
+                {userDetails[0] ? userDetails[0].scm : "Update Father Name"}
               </p>
               <div className="edit">
-                <i class="fa fa-edit"></i>
+                <i className="fa fa-edit"></i>
               </div>
             </div>
           </div>
         </div>
 
-        {/*  */}
+        {/*Personal Project.......  */}
         <div className="card4">
           <h2>Personal Projects</h2>
-          <div className="cardInfo">
-            <div className="userInfo">
-              <h3>Online Book Store</h3>
+          {userProject.map((data, key) => {
+            return (
+              <div className="cardInfo" key={key}>
+                <div className="userInfo">
+                  <h3>{data.projectName}</h3>
 
-              <p>
-                Used Technologies: SpringBoot (JWT), Angular. Web app Demo, GIT
-                App Application (React, Angular & NodeJS)
-              </p>
-
-              <div className="edit">
-                <i class="fa fa-edit"></i>
+                  <p>{data.technology}</p>
+                  <p>
+                    {" "}
+                    Link: <b> {data.projectLink}</b>
+                  </p>
+                  <div className="edit">
+                    <i className="fa fa-edit"></i>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="cardInfo">
-            <div className="userInfo">
-              <h3>Online Book Store</h3>
-
-              <p>
-                Used Technologies: SpringBoot (JWT), Angular. Web app Demo, GIT
-                App Application (React, Angular & NodeJS)
-              </p>
-
-              <div className="edit">
-                <i class="fa fa-edit"></i>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
         {/*  */}
 
@@ -173,37 +181,52 @@ export const View = () => {
           <div className="cardInfo">
             <div className="userInfo">
               <p>
-                <b>Father's Name:</b> Md. Salam Khan
+                <b>Father's Name:</b>{" "}
+                {userDetails[0] ? userDetails[0].father : "Update Father Name"}
               </p>
               <p>
-                <b>Mother's Name:</b> Md. Salam Khan
+                <b>Mother's Name:</b>{" "}
+                {userDetails[0] ? userDetails[0].mother : "Update Mother Name"}
               </p>
               <p>
-                <b>Nationality :</b> Md. Salam Khan
+                <b>Nationality :</b>{" "}
+                {userDetails[0]
+                  ? userDetails[0].national
+                  : "Update Country Name"}
               </p>
               <p>
-                <b>P. Address :</b> Md. Salam Khan
+                <b>P. Address :</b>
+                {userDetails[0]
+                  ? userDetails[0].pAddress
+                  : "Update parmanent address"}
               </p>
               <p>
-                <b>DOB:</b> 12th Dec 1996
+                <b>DOB:</b>{" "}
+                {userDetails[0] ? userDetails[0].dob : "Update Birth Date"}
               </p>
               <p>
-                <b>Gender</b>: Male
+                <b>Gender</b>:{" "}
+                {userDetails[0] ? userDetails[0].gender : "Update Gender"}
               </p>
               <p>
-                <b>Blood Group</b>: O+
+                <b>Blood Group</b>:{" "}
+                {userDetails[0] ? userDetails[0].blood : "Update blood "}
               </p>
               <p>
-                <b>Religion:</b> Islam
+                <b>Religion:</b>{" "}
+                {userDetails[0] ? userDetails[0].religion : "Update religion "}
               </p>
+              {/* <p>{userProject[0]}</p> */}
               <div className="edit">
-                <i class="fa fa-edit"></i>
+                <i className="fa fa-edit"></i>
               </div>
             </div>
           </div>
         </div>
         {/*  */}
       </div>
+
+      {/* .............. */}
     </div>
   );
 };
