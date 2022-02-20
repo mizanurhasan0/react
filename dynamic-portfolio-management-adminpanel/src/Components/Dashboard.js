@@ -12,7 +12,7 @@ import { Auth } from "../Pages/Auth";
 import { PersonalDetails } from "../Pages/PersonalDetails";
 import { View } from "../Pages/View";
 import { Gallary } from "../Pages/Gallary";
-
+import { ImageProcessing } from "../Pages/ImageProcessing";
 export const Dashboard = () => {
   const [navActive, setNavActive] = useState(true);
   const onClickActive = () => {
@@ -139,6 +139,7 @@ export const Dashboard = () => {
             <Route path="/basicinfo" element={<PersonalDetails />} />
             <Route path="/view" element={<View />} />
             <Route path="/gallary" element={<Gallary />} />
+            <Route path="/img" element={<ImageProcessing />} />
           </Routes>
         </div>
       </div>

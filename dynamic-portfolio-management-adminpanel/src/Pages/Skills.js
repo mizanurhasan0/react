@@ -24,7 +24,7 @@ export const Skills = () => {
 
   const onSubmit = (data) => {
     data.skill = "skill";
-    console.log(data);
+    // console.log(data);
     axios.post(Api, data).then((response) => {
       console.log(response);
     });

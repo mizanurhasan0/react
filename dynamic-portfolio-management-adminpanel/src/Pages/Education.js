@@ -23,10 +23,14 @@ export const Education = () => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
-    axios.post(Api, data).then((response) => {
-      console.log("add Education");
-    });
+    // console.log(data);
+    axios
+      .post(Api, data, {
+        headers: { accessToken: localStorage.getItem("token") },
+      })
+      .then((response) => {
+        console.log("add Education");
+      });
   };
 
   return (

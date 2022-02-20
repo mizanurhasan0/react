@@ -11,6 +11,7 @@ export const View = () => {
   const [userProject, setUserProject] = useState([]);
   const [education, setEducation] = useState([]);
   const [experience, setExperience] = useState([]);
+  const [user, setUser] = useState([""]);
 
   useEffect(() => {
     axios.get(Api + "/project/getworkbyuser").then((response) => {
@@ -19,13 +20,16 @@ export const View = () => {
     });
     axios.get(Api + "/userinfo").then((response) => {
       setUserDetails(response.data);
-      // console.log(userDetails);
+      console.log(userDetails);
     });
     axios.get(Api + "/education").then((response) => {
       setEducation(response.data[0]);
     });
     axios.get(Api + "/experience").then((response) => {
       setExperience(response.data);
+    });
+    axios.get(Api + "/auth/getuser").then((response) => {
+      setUser(response.data.user);
     });
   }, []);
   return (
@@ -35,15 +39,18 @@ export const View = () => {
           <h2>Top Info</h2>
           <div className="cardInfo">
             <div>
-              <img src={require("../Images/logo.png")} alt="img" />
+              <img
+                src={"http://localhost:3001/images/" + user.image}
+                alt="img"
+              />
             </div>
             <div className="userInfo">
-              <h3>User Name</h3>
+              <h3>{user.username}</h3>
               <div>
                 <span>
                   <i className="fa fa-envelope"></i>
                 </span>
-                <p>email@gmail.com</p>
+                <p>{user.email}</p>
               </div>
               <div>
                 <span>
@@ -55,7 +62,11 @@ export const View = () => {
                 <span>
                   <i className="fa fa-location-arrow"></i>
                 </span>
-                <p>Dhanmondi-27, Dhaka</p>
+                <p>
+                  {userDetails[0]
+                    ? userDetails[0].pAddress
+                    : "Deafult, address"}
+                </p>
               </div>
               <div className="edit">
                 <i className="fa fa-edit"></i>
