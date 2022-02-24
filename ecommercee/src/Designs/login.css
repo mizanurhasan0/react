@@ -1,0 +1,73 @@
+/* .container {
+  padding-top: 30px;
+} */
+.container {
+  box-sizing: border-box;
+}
+.container .login-title {
+  top: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  font-family: "Courgette", Courier, monospace;
+  letter-spacing: 15px;
+  margin-bottom: 30px;
+  font-size: 40px;
+  color: #f82541;
+  text-transform: uppercase;
+  position: relative;
+}
+
+@media (max-width: 1200px) {
+  .container .login-title {
+    top: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: "Courgette", Courier, monospace;
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+    font-size: 30px;
+    color: #f82541;
+    text-transform: uppercase;
+    position: relative;
+  }
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.loginFormField {
+  display: flex;
+  position: relative;
+}
+.loginInputField {
+  /* position: relative; */
+  padding-left: 40px;
+}
+.loginIcon {
+  position: absolute;
+  top: 9px;
+  font-size: 30px;
+  left: 5px;
+}
+.btn-default {
+  background: #f74159;
+  color: white;
+  float: right;
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-family: "Courgette";
+  letter-spacing: 4px;
+}
+.loginForm .error {
+  background: #f10020;
+  height: 48px;
+  width: 8px;
+  border-radius: 2px;
+  color: #f10020;
+}

@@ -23,6 +23,7 @@
 .details .short-specification .cartbtn {
   background: #ff5c72;
   margin-left: 10px;
+  margin-top: 10px;
   border: none;
   color: white;
 }

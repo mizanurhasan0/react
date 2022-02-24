@@ -8,7 +8,9 @@ import { About } from "./Pages/About";
 import { Add } from "./Pages/Add";
 import { Card } from "./Pages/Card";
 import { Details } from "./Pages/Details";
+import { Login } from "./Pages/Login";
 import { Products } from "./Pages/Products";
+import { Registration } from "./Pages/Registration";
 
 function App() {
   const [numberOfCurd, setNumberOfCard] = useState(0);
@@ -25,10 +27,11 @@ function App() {
             <Route path="/details" element={<Details />} />
             <Route path="/about" element={<About />} />
             <Route path="/add" element={<Add />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/reg" element={<Registration />} />
           </Routes>
         </BrowserRouter>
       </GlobalContext.Provider>
-      <button className="btn btn-success">Click</button>
     </div>
   );
 }

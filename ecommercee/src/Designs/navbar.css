@@ -41,7 +41,18 @@ button.navbar-toggler.collapsed {
   transform-origin: right;
   transition: transform 0.4s linear;
 }
-
+.navbar-nav .nav-item a.active::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 3px;
+  left: 0;
+  bottom: 0;
+  background-color: #ff5c72b9;
+  transform: scale(1);
+  transform-origin: right;
+  transition: transform 0.4s linear;
+}
 .navbar-nav .nav-item a:hover::before {
   transform: scale(1);
   transform-origin: left;
