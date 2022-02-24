@@ -1,0 +1,15 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "font-awesome/css/font-awesome.min.css";
+@font-face {
+  font-family: "Courgette";
+  src: url(./Fonts/Courgette-Regular.ttf);
+}
+@font-face {
+  font-family: "Shizuru";
+  src: url(./Fonts/Shizuru-Regular.ttf);
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
