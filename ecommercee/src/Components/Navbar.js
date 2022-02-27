@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "../Designs/navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,14 +6,18 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { GlobalContext } from "../Helper/GlobalContext";
 
 export const Navbar = () => {
-  const [activenav, setActiveNav] = useState(1);
-  const { numberOfCurd, setNumberOfCard } = useContext(GlobalContext);
-
+  const { numberOfCurd, authUser, setAuthUser, setActiveNav, activenav } =
+    useContext(GlobalContext);
   const activeLink = (index) => {
     setActiveNav(index);
   };
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+    setActiveNav(4);
+    setAuthUser({ email: "", id: 0, status: false });
+  };
   return (
-    <div className="container">
+    <div className="navContainer">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
@@ -52,26 +56,42 @@ export const Navbar = () => {
                   About
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link
-                  className={activenav === 3 ? "nav-link active" : "nav-link"}
-                  onClick={() => activeLink(3)}
-                  aria-current="page"
-                  to="/add"
-                >
-                  Add
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className={activenav === 4 ? "nav-link active" : "nav-link"}
-                  onClick={() => activeLink(4)}
-                  aria-current="page"
-                  to="/login"
-                >
-                  Login
-                </Link>
-              </li>
+              {authUser.status && (
+                <li className="nav-item">
+                  <Link
+                    className={activenav === 3 ? "nav-link active" : "nav-link"}
+                    onClick={() => activeLink(3)}
+                    aria-current="page"
+                    to="/add"
+                  >
+                    Add
+                  </Link>
+                </li>
+              )}
+
+              {!authUser.status ? (
+                <li className="nav-item">
+                  <Link
+                    className={activenav === 4 ? "nav-link active" : "nav-link"}
+                    onClick={() => activeLink(4)}
+                    aria-current="page"
+                    to="/login"
+                  >
+                    Login
+                  </Link>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <Link
+                    className={activenav === 4 ? "nav-link active" : "nav-link"}
+                    onClick={logout}
+                    aria-current="page"
+                    to="/login"
+                  >
+                    Logout
+                  </Link>
+                </li>
+              )}
             </ul>
             <div className="d-flex">
               <Link className="nav-item-card" aria-current="page" to="/card">

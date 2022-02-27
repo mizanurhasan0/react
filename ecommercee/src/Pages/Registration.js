@@ -1,37 +1,60 @@
 import {
-  faAddressCard,
   faEnvelope,
   faLocation,
-  faLock,
   faLockOpen,
   faMobile,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import "../Designs/register.css";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { phoneValidation, serverApi } from "../TinnyHelper/TinyHelper";
 
 export const Registration = () => {
+  const navigation = useNavigate();
+
   const initialValues = {
     email: "",
     password: "",
     mobile: "",
     address: "",
   };
+
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required("-"),
+    email: Yup.string().email("-").required("-"),
     password: Yup.string().required("-"),
-    mobile: Yup.string().required("-"),
+    mobile: Yup.string()
+      .matches(phoneValidation, "-")
+      .min(11, "-")
+      .max(11, "-")
+      .required("-"),
     address: Yup.string().required("-"),
   });
-  const onSubmit = (e) => {
-    console.log(e);
+
+  const getUser = (text) => {
+    const username = text.email.split("@");
+    const name = username[0].replaceAll(".", " ");
+    return name[0].toUpperCase() + name.slice(1);
+  };
+  const onSubmit = (data) => {
+    const username = getUser(data);
+    axios.post(serverApi + "user", data).then((response) => {
+      if (response.data.error) {
+        toast.error(`${username} already exist!`);
+      } else {
+        toast.success(`${username} Success!`);
+        navigation("/login");
+      }
+    });
   };
 
   return (
     <div>
-      <div className="container">
+      <div className="container registerContainer">
         <h2 className="login-title">Sign up your account</h2>
         <section className="vh-100 loginForm">
           <div className="container-fluid h-custom">
@@ -40,7 +63,7 @@ export const Registration = () => {
                 <img
                   src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
                   className="img-fluid"
-                  alt="Sample image"
+                  alt=""
                 />
               </div>
               <Formik
@@ -55,6 +78,7 @@ export const Registration = () => {
                       type="email"
                       id="form3Example1"
                       name="email"
+                      required
                       className="form-control form-control-lg loginInputField"
                       placeholder="Enter a valid email address"
                     />
@@ -95,7 +119,7 @@ export const Registration = () => {
                       id="form3Example3"
                       name="mobile"
                       className="form-control form-control-lg loginInputField"
-                      placeholder="Enter Mobile"
+                      placeholder="Enter phone"
                     />
                     <FontAwesomeIcon
                       className="loginIcon"
@@ -112,6 +136,7 @@ export const Registration = () => {
                     <Field
                       type="text"
                       id="form3Example4"
+                      required
                       name="address"
                       className="form-control form-control-lg loginInputField"
                       placeholder="Enter Home Address"
@@ -122,7 +147,7 @@ export const Registration = () => {
                       color="#DCDCDC"
                     />
                     <ErrorMessage
-                      name="location"
+                      name="address"
                       component="span"
                       className="error"
                     />

@@ -1,17 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../Designs/login.css";
 import * as Yup from "yup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faShoppingCart,
-  faEnvelope,
-  faLock,
-  faMessage,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import axios from "axios";
+import { serverApi } from "../TinnyHelper/TinyHelper";
+import { toast } from "react-toastify";
+import { GlobalContext } from "../Helper/GlobalContext";
 
 export const Login = () => {
+  const { authUser, setAuthUser, setActiveNav } = useContext(GlobalContext);
+  const navigation = useNavigate();
+
   const initialValues = {
     email: "",
     password: "",
@@ -20,22 +22,41 @@ export const Login = () => {
     email: Yup.string().required("-"),
     password: Yup.string().required("-"),
   });
-  const onSubmit = (e) => {
-    console.log(e);
+  const onSubmit = (data) => {
+    axios.post(serverApi + "user/login", data).then((response) => {
+      if (response.data.error) {
+        setAuthUser({ ...authUser, status: false });
+        toast.error(response.data.error);
+      } else {
+        toast.success("Currect Authenticate!");
+        localStorage.setItem("accessToken", response.data.token);
+        setActiveNav(1);
+        setAuthUser({
+          email: response.data.email,
+          id: response.data.id,
+          status: true,
+        });
+        navigation("/");
+      }
+    });
   };
-
+  useEffect(() => {
+    if (authUser.status) {
+      navigation("/");
+    }
+  }, []);
   return (
     <div>
-      <div className="container">
+      <div className="container loginContainer">
         <h2 className="login-title">Sign into your account</h2>
         <section className="vh-100 loginForm">
           <div className="container-fluid h-custom">
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-md-9 col-lg-6 col-xl-5">
                 <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                  src={require("../Images/defaultlogin.webp")}
                   className="img-fluid"
-                  alt="Sample image"
+                  alt=""
                 />
               </div>
               <Formik

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "../node_modules/bootstrap/dist/js/bootstrap";
 import "./App.css";
@@ -11,12 +12,42 @@ import { Details } from "./Pages/Details";
 import { Login } from "./Pages/Login";
 import { Products } from "./Pages/Products";
 import { Registration } from "./Pages/Registration";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { serverApi, headers } from "./TinnyHelper/TinyHelper";
 
+toast.configure();
 function App() {
+  const [activenav, setActiveNav] = useState(1);
+  const [authUser, setAuthUser] = useState({ status: false, email: "", id: 0 });
   const [numberOfCurd, setNumberOfCard] = useState(0);
+  useEffect(() => {
+    axios.get(serverApi + "user", headers).then((response) => {
+      console.log(response.data);
+      if (response.data.error) {
+        setAuthUser({ ...authUser, status: false });
+      } else {
+        setAuthUser({
+          email: response.data.email,
+          id: response.data.id,
+          status: true,
+        });
+      }
+    });
+  }, []);
   return (
     <div className="App">
-      <GlobalContext.Provider value={{ numberOfCurd, setNumberOfCard }}>
+      <GlobalContext.Provider
+        value={{
+          numberOfCurd,
+          setNumberOfCard,
+          authUser,
+          setAuthUser,
+          activenav,
+          setActiveNav,
+        }}
+      >
         <BrowserRouter>
           <div className="nav">
             <Navbar />
@@ -32,6 +63,17 @@ function App() {
           </Routes>
         </BrowserRouter>
       </GlobalContext.Provider>
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../Designs/product.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
@@ -9,7 +9,7 @@ export const Products = () => {
   let navigation = useNavigate();
   const { numberOfCurd, setNumberOfCard } = useContext(GlobalContext);
   return (
-    <div>
+    <div className="container1">
       <div className="banner">
         <h3 className="baner-title">
           <span className="baner-title-text">Software Development</span>
@@ -21,7 +21,7 @@ export const Products = () => {
           <h3 className="body-title">Products</h3>
           {/* Search  Bar */}
 
-          <div className="mb-4 searchbar-container">
+          <div className="mb-4 container searchbar-container">
             <input type="search" required />
             <label>Search</label>
           </div>
@@ -183,8 +183,8 @@ export const Products = () => {
             </div>
             {/* end */}
           </div>
+          {/* End Product List */}
         </div>
-        {/*  */}
       </div>
     </div>
   );

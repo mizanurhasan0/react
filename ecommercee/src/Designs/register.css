@@ -1,10 +1,11 @@
 /* .container {
   padding-top: 30px;
 } */
-.loginContainer {
+
+.registerContainer {
   box-sizing: border-box;
 }
-.loginContainer .login-title {
+.registerContainer .login-title {
   top: 40px;
   width: 100%;
   display: flex;
@@ -19,7 +20,7 @@
 }
 
 @media (max-width: 1200px) {
-  .loginContainer .login-title {
+  .registerContainer .login-title {
     top: 40px;
     width: 100%;
     display: flex;
@@ -34,27 +35,27 @@
   }
 }
 
-.loginContainer .loginForm {
+.registerContainer .loginForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.loginContainer .loginFormField {
+.registerContainer .loginFormField {
   display: flex;
   position: relative;
 }
-.loginContainer .loginInputField {
+.registerContainer .loginInputField {
   /* position: relative; */
   padding-left: 40px;
 }
-.loginContainer .loginIcon {
+.registerContainer .loginIcon {
   position: absolute;
   top: 9px;
   font-size: 30px;
   left: 5px;
 }
-.loginContainer .btn-default {
+.registerContainer .btn-default {
   background: #f74159;
   color: white;
   float: right;
@@ -64,7 +65,7 @@
   font-family: "Courgette";
   letter-spacing: 4px;
 }
-.loginContainer .loginForm .error {
+.registerContainer .loginForm .error {
   background: #f10020;
   height: 48px;
   width: 8px;

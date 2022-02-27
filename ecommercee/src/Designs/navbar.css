@@ -1,3 +1,6 @@
+.navContainer {
+  width: 100%;
+}
 button.navbar-toggler.collapsed {
   border-color: #ff5c72;
   color: #ff5c72;
