@@ -1,7 +1,3 @@
-/* .container {
-  padding-top: 30px;
-} */
-
 .registerContainer {
   box-sizing: border-box;
 }
@@ -10,7 +6,7 @@
   width: 100%;
   display: flex;
   justify-content: end;
-  font-family: "Courgette", Courier, monospace;
+  font-family: "Courgette";
   letter-spacing: 15px;
   margin-bottom: 30px;
   font-size: 40px;
@@ -25,7 +21,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    font-family: "Courgette", Courier, monospace;
+    font-family: "Courgette";
     letter-spacing: 5px;
     margin-bottom: 30px;
     font-size: 30px;
@@ -46,7 +42,6 @@
   position: relative;
 }
 .registerContainer .loginInputField {
-  /* position: relative; */
   padding-left: 40px;
 }
 .registerContainer .loginIcon {

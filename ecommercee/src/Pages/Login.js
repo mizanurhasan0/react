@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../Designs/login.css";
 import * as Yup from "yup";
@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { GlobalContext } from "../Helper/GlobalContext";
 
 export const Login = () => {
-  const { authUser, setAuthUser, setActiveNav } = useContext(GlobalContext);
+  const { globalVariable, setGlobalVariable } = useContext(GlobalContext);
   const navigation = useNavigate();
 
   const initialValues = {
@@ -19,32 +19,28 @@ export const Login = () => {
     password: "",
   };
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required("-"),
+    email: Yup.string().email("-").required("-"),
     password: Yup.string().required("-"),
   });
   const onSubmit = (data) => {
     axios.post(serverApi + "user/login", data).then((response) => {
       if (response.data.error) {
-        setAuthUser({ ...authUser, status: false });
+        setGlobalVariable({ ...globalVariable, status: false, activeNav: 4 });
         toast.error(response.data.error);
       } else {
         toast.success("Currect Authenticate!");
         localStorage.setItem("accessToken", response.data.token);
-        setActiveNav(1);
-        setAuthUser({
-          email: response.data.email,
-          id: response.data.id,
+
+        setGlobalVariable({
+          ...globalVariable,
           status: true,
+          activeNav: 1,
         });
         navigation("/");
       }
     });
   };
-  useEffect(() => {
-    if (authUser.status) {
-      navigation("/");
-    }
-  }, []);
+
   return (
     <div>
       <div className="container loginContainer">

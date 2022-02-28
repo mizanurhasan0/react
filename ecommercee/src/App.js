@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "../node_modules/bootstrap/dist/js/bootstrap";
 import "./App.css";
@@ -15,37 +14,47 @@ import { Registration } from "./Pages/Registration";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import { serverApi, headers } from "./TinnyHelper/TinyHelper";
+import { headers, serverApi } from "./TinnyHelper/TinyHelper";
 
 toast.configure();
 function App() {
-  const [activenav, setActiveNav] = useState(1);
-  const [authUser, setAuthUser] = useState({ status: false, email: "", id: 0 });
-  const [numberOfCurd, setNumberOfCard] = useState(0);
-  useEffect(() => {
-    axios.get(serverApi + "user", headers).then((response) => {
-      console.log(response.data);
-      if (response.data.error) {
-        setAuthUser({ ...authUser, status: false });
+  const [products, setProducts] = useState([""]);
+  const [globalVariable, setGlobalVariable] = useState({
+    status: false,
+    email: "",
+    id: 0,
+    activeNav: 1,
+    cart: 0,
+  });
+
+  useState(() => {
+    axios.get(serverApi, "user", headers).then((res) => {
+      if (res.data.error) {
+        setGlobalVariable({ ...globalVariable, status: false });
       } else {
-        setAuthUser({
-          email: response.data.email,
-          id: response.data.id,
+        setGlobalVariable({
+          activeNav: 1,
+          cart: 0,
+          email: res.data.email,
+          id: res.data.id,
           status: true,
         });
       }
+    });
+
+    axios.get(serverApi + "product").then((res) => {
+      // console.log(res.data);
+      setProducts(res.data);
     });
   }, []);
   return (
     <div className="App">
       <GlobalContext.Provider
         value={{
-          numberOfCurd,
-          setNumberOfCard,
-          authUser,
-          setAuthUser,
-          activenav,
-          setActiveNav,
+          globalVariable,
+          setGlobalVariable,
+          products,
+          setProducts,
         }}
       >
         <BrowserRouter>
@@ -55,7 +64,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Products />} />
             <Route path="/card" element={<Card />} />
-            <Route path="/details" element={<Details />} />
+            <Route path="/details/:id" element={<Details />} />
             <Route path="/about" element={<About />} />
             <Route path="/add" element={<Add />} />
             <Route path="/login" element={<Login />} />
@@ -64,7 +73,7 @@ function App() {
         </BrowserRouter>
       </GlobalContext.Provider>
       <ToastContainer
-        position="top-left"
+        position="bottom-left"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}

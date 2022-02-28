@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "../Designs/details.css";
+import { serverApi } from "../TinnyHelper/TinyHelper";
 
 export const Details = () => {
   const [toggleState, setToggleState] = useState(1);
-
+  const [product, setProduct] = useState([]);
+  let { id } = useParams();
   const toggleTab = (index) => {
     setToggleState(index);
     console.log(index);
   };
+  useEffect(() => {
+    axios.get(serverApi + `product/${id}`).then((res) => {
+      setProduct(res.data);
+    });
+  });
   return (
     <div className="container details">
       <div className="row">
@@ -15,7 +24,7 @@ export const Details = () => {
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img
-                src={require("../Images/product.jpg")}
+                src={serverApi + `images/${product.p_image}`}
                 className="d-block w-100"
                 alt="product"
               />
@@ -24,15 +33,16 @@ export const Details = () => {
         </div>
         <div className="col-md-7 col-sm-12 short-specification">
           <p className="newArrival text-center">New</p>
-          <h2>Dell Laptop Core i3</h2>
-          <p>Product Code : ISR2022</p>
+          <h2>{product.title}</h2>
+          <p>Product Code : {product.code}</p>
 
           <p className="price">
-            USD{" "}
+            TK{" "}
             <span className="text-muted text-decoration-line-through card-oldPrice">
-              $20.00
+              {product.reg_price}
             </span>
-            {" - "}$ 15.00
+            {" - "}
+            {product.dis_price}
           </p>
           <p>
             <b>Availabililty</b> In Stock
@@ -41,7 +51,7 @@ export const Details = () => {
             <b>Condition</b> New
           </p>
           <p>
-            <b>Brand</b> Dell Company
+            <b>Brand</b> {product.brand} Company
           </p>
           <label>Quantity</label>
           <input type="text" defaultValue={1} className="details-qty-field" />
@@ -78,33 +88,12 @@ export const Details = () => {
               <h2>Basic Info</h2>
               <hr />
               {/*  */}
-              <p>
-                Description HP 15s-du1088TU Intel Pentium N5030 15.6 inch FHD
-                Laptop with Win 10 HP P15s-du1088TU Laptop comes with Intel
-                Pentium Silver 5030 processor, 4GB DDR4 RAM, 1TB HDD, 15.6"
-                diagonal FHD backlit (1920 x 1080) Display, Intel UHD Graphics
-                and Windows 10 Home. This laptop featured with Li-ion battery,
-                Chicklit Keyboard, 720p HD Web camera with integrated dual array
-                digital microphones. Here, Realtek RTL8822CE 802.11a/b/g/n/ac
-                (2x2) Wi-Fi and Bluetooth 5 wireless and networking connectivity
-                are also available. This laptop also has SuperSpeed USB Type-A
-                signaling rate AC smart pin, HDMI x 1, 2.0 headphone/microphone
-                combo ports and connectivity. This latest HP 15s-du1088TU Laptop
-                has 01 year International Limited Warranty (Terms & condition
-                Apply As Per HP).
-              </p>
+              <p>{product.description}</p>
             </div>
             <div className={toggleState === 2 ? "active-content" : "content"}>
               <h2>Description</h2>
               <hr />
-              <p>
-                Intel Pentium Silver 5030 (1.10 To 3.10 GHz 4MB Cache) Processor
-                Display 15.6" diagonal FHD backlit (1920 x 1080) Display Memory
-                4GB DDR4 RAM Storage 1TB HDD Graphics Intel UHD Graphics 605
-                Operating System Windows 10 Home Microsoft Office Home & Student
-                Audio 2.0 headphone/microphone combo Office Microsoft Office
-                Home & Student
-              </p>
+              <p>{product.specification}</p>
             </div>
             <div className={toggleState === 3 ? "active-content" : "content"}>
               <h2>Review</h2>

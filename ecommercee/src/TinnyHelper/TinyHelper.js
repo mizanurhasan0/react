@@ -4,5 +4,10 @@ let serverApi = "http://localhost:3001/";
 const headers = {
   headers: { accessToken: localStorage.getItem("accessToken") },
 };
-
-export { phoneValidation, serverApi, headers };
+const img_headers = {
+  headers: {
+    "content-type": "multipart/form-data",
+    accessToken: localStorage.getItem("accessToken"),
+  },
+};
+export { phoneValidation, serverApi, headers, img_headers };

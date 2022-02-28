@@ -1,9 +1,10 @@
 .AppAdd {
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   background: rgb(240, 239, 239);
   display: grid;
   justify-items: center;
+  padding-bottom: 50px;
 }
 
 .AppAdd .CreateBox {
