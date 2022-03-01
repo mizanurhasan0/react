@@ -1,5 +1,9 @@
 # Getting Started with Create React App of Tic Tac Game
 
+## Tic tac game demo screen short with alert box
+
+![Game short](https://github.com/mizanurhasan0/react/blob/23eecf3d36df9ee29db72c168fe5f1e03aa9ba94/tic-tok-game/src/Images/tiktac%20game.PNG "Tic tac")
+##
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
