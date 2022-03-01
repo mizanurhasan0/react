@@ -1,8 +1,31 @@
-# Getting Started with Create React App
+# Getting Started with Create [React js](https://github.com/mizanurhasan0/nodejs/tree/main/e-commerce) App based on  [Nodejs](https://github.com/mizanurhasan0/nodejs/tree/main/e-commerce).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Home page of E-Commerce application 
+![Home page](https://github.com/mizanurhasan0/nodejs/blob/6db0cf1628b26150d90349a9cbe728a77f4977a3/e-commerce/images/photo/home%20page%20overlay.PNG "Home page")
+
+## Navbar 
+![Navbar](https://github.com/mizanurhasan0/nodejs/blob/6db0cf1628b26150d90349a9cbe728a77f4977a3/e-commerce/images/photo/navbar.PNG "Navbar")
+
+## Grid based Product with responsive 
+![Products](https://github.com/mizanurhasan0/nodejs/blob/6db0cf1628b26150d90349a9cbe728a77f4977a3/e-commerce/images/photo/grid%20products.PNG "Products")
+
+## Insert New products beside preview images and input validation warning 
+![Insert New products](https://github.com/mizanurhasan0/nodejs/blob/6db0cf1628b26150d90349a9cbe728a77f4977a3/e-commerce/images/photo/add%20Product%20panel.PNG "Add Product")
+
+## Responsive Login Form and it's mobile number and email validation 
+![Login](https://github.com/mizanurhasan0/nodejs/blob/6db0cf1628b26150d90349a9cbe728a77f4977a3/e-commerce/images/photo/login%20page.PNG "Login")
+
+## Responsive Register Form and it's mobile number and email validation 
+![Register](https://github.com/mizanurhasan0/nodejs/blob/6db0cf1628b26150d90349a9cbe728a77f4977a3/e-commerce/images/photo/resgistration%20form.PNG "Register")
+
+## Responsive description of single products 
+![product](https://github.com/mizanurhasan0/nodejs/blob/6db0cf1628b26150d90349a9cbe728a77f4977a3/e-commerce/images/photo/single%20product%20description.PNG "product")
+
+
+## Responsive description of single products 
+![desccription](https://github.com/mizanurhasan0/nodejs/blob/6db0cf1628b26150d90349a9cbe728a77f4977a3/e-commerce/images/photo/cart%20description.PNG "description")
+
 
 In the project directory, you can run:
 
