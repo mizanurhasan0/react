@@ -7,7 +7,7 @@
 ## Question view which comes to randomly and add mark also nice hover effect
 ![Quiz Page](https://github.com/mizanurhasan0/react/blob/9c4e628722b776a68e3b78982163045a328bfaf4/Quiz%20App/quiz-app/src/images/testing%20page.PNG "quiz page")
 
-## final page that contains overview of users (mark,out of mark and congratulation massage show accouring to his score)
+## Final page that contains overview of users (mark,out of mark and congratulation massage show accouring to his score)
 ![Quiz Page](https://github.com/mizanurhasan0/react/blob/9c4e628722b776a68e3b78982163045a328bfaf4/Quiz%20App/quiz-app/src/images/last%20page%20of%20quiz%20app.PNG "quiz page")
 
 
