@@ -81,7 +81,7 @@
   top: 0;
   right: 0;
 }
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .i {
     flex-direction: column;
   }
