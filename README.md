@@ -6,7 +6,8 @@
 ### some demo of project
 
 ## [Complete ECommerce website with Admin panel](https://github.com/mizanurhasan0/react/tree/main/portfolio2) Demo 
-![Home page](https://www.youtube.com/watch?v=bVz0m3bWh_E&ab_channel=Eng.MizanurHasan "Info page")
+![Home page]( "Info page")
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://www.youtube.com/watch?v=bVz0m3bWh_E&ab_channel=Eng.MizanurHasan)
 
 ## [Portfolio](https://github.com/mizanurhasan0/react/tree/main/portfolio2) Demo 
 ![Home page](https://github.com/mizanurhasan0/react/blob/ad900e84efeeb77c73502489519009d50ee269df/portfolio2/src/img/project%20screen%20short/info.PNG "Info page")
